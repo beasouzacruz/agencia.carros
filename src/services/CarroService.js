@@ -1,0 +1,42 @@
+import { Carro } from '@'
+
+
+export class CarroService{
+    constructor(repository){
+        this.repository = repository;
+    }
+
+    async cadastrar (nome, tipo){
+        if (!nome || nome,lenght <2)
+            throw new Error  ("O nome deve ter no minímo 2 caracteres");
+        if (!tipo)
+            throw new Error ("O tipo de veículo é obrigatório!");
+        return await this.repository.salvar (new Caro (nome, tipo));
+    }
+
+    async listar () {
+        return await this.repository.listarTodos();
+    }
+
+    async buscarPorId (id){
+        const carro = await this.repository.buscarPorId(id);
+        if (!carro) throw new Error ("Veiculo não encontrado.")
+            return carro;
+    }
+
+     async atualizar(id, nome, tipo) {
+        if (!id)
+           throw new Error("Id é obrigatoria para atualização.")
+        if (!nome || !tipo)
+            throw new Error ("Nome e tipo são obrigatórios.");
+
+        await this.buscarPorId(id);
+        const carroAtualizado = new Carro(nome, tipo, id);
+        return await this.repository.atualizar(id, carroAtualizado);
+     }
+
+     async excluir(id) {
+        await this.buscarPorId(id);
+        return await this.repository.excluir(id);
+     }
+}
