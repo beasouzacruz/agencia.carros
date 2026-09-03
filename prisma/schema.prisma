@@ -1,14 +1,21 @@
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+    provider = "mysql"
+    url      = env("DATABASE_URL")
 }
 
-model carro{
-    id   Int  @id @default(autoincrement())
+model carro {
+    id   Int    @id @default(autoincrement())
     nome String @db.VarChar(255)
     tipo String @db.VarChar(255)
+}
+
+model concessionaria {
+    id     Int    @id @default(autoincrement())
+    nome   String @db.VarChar(255)
+    cnpj   String @db.VarChar(255)
+    cidade String @db.VarChar(255)
 }

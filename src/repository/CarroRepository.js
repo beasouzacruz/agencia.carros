@@ -13,7 +13,7 @@ export class CarroRepository{
         return dados.map(d => new Carro(d.nome, d.tipo, d.id));
        }
 
-       async buscarPoId(id) {
+       async buscarPorId(id) {
         const dado = await prisma.carro.findUnique({
             where: { id: Number(id) }
         });
